@@ -2,7 +2,7 @@
  * BinarySearchTree.cpp
  *
  *  Created on: 6 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 
 #include "BinarySearchTree.h"
@@ -83,7 +83,7 @@ void BinarySearchTree::addNode(int value){
 	}
 }
 
-BSTNode * minimum(BSTNode *node){
+BSTNode * BinarySearchTree::minimum(BSTNode *node){
 	if(node == NULL){
 		return node;
 	}
@@ -93,7 +93,7 @@ BSTNode * minimum(BSTNode *node){
 	return node;
 }
 
-BSTNode * maximum(BSTNode *node){
+BSTNode * BinarySearchTree::maximum(BSTNode *node){
 	if(node == NULL){
 		return node;
 	}
@@ -103,7 +103,7 @@ BSTNode * maximum(BSTNode *node){
 	return node;
 }
 
-BSTNode * nastepnik(BSTNode *node){
+BSTNode * BinarySearchTree::nastepnik(BSTNode *node){
 	if(node == NULL){ //sprawdza czy drzewo jest puste
 		return node;
 	}
@@ -119,7 +119,7 @@ BSTNode * nastepnik(BSTNode *node){
 	}
 }
 
-BSTNode * poprzednik(BSTNode *node){
+BSTNode * BinarySearchTree::poprzednik(BSTNode *node){
 	if(node == NULL){
 		return node;
 	}
@@ -222,7 +222,7 @@ BSTNode * BinarySearchTree::searching(int value){
 	cout << "Nie ma takiej liczby" << endl;
 }
 
-void rightRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w prawo potrzebna dla alrogrytmu DSW
+void BinarySearchTree::rightRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w prawo potrzebna dla alrogrytmu DSW
 	if(tempRoot->left != NULL){
 		BSTNode *leftson = tempRoot->left;
 		BSTNode *tempRootparent = tempRoot->parent;
@@ -247,7 +247,7 @@ void rightRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w prawo potrze
 	}
 }
 
-void leftRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w lewo potrzebna dla alrogrytmu DSW
+void BinarySearchTree::leftRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w lewo potrzebna dla alrogrytmu DSW
 	if(tempRoot->right != NULL){
 		BSTNode *rightson = tempRoot->right;
 		BSTNode *tempRootparent = tempRoot->parent;

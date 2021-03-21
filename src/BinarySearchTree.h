@@ -2,7 +2,7 @@
  * BinarySearchTree.h
  *
  *  Created on: 6 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 
 #ifndef BINARYSEARCHTREE_H_
@@ -22,18 +22,25 @@ public:
 class BinarySearchTree {
 public:
 	BSTNode *root;
+private:
+	BSTNode * poprzednik(BSTNode *node);
+	BSTNode * nastepnik(BSTNode *node);
+	BSTNode * minimum(BSTNode *node);
+	BSTNode * maximum(BSTNode *node);
+	void inOrder(BSTNode *node);
+	void rightRotation(BSTNode *tempRoot, BSTNode *& root);
+	void leftRotation(BSTNode *tempRoot, BSTNode *& root);
+	void deleteStructure();
 public:
 	BinarySearchTree();
-	virtual ~BinarySearchTree();
-	void deleteStructure();
+	~BinarySearchTree();
 	void addNode(int value);
 	void deleteNode(BSTNode *& root, int value);
 	BSTNode *searching(int value);
-	void DSW(); //algorytm r�wnowa�enia drzewa
+	void DSW(); //algorytm rownowazenia drzewa
 	void loadDataFromFile(const char * filename);
 	void show();
 	void AddRandomToTesting(int size, int start, int end);
-	void inOrder(BSTNode *node);
 };
 
 #endif /* BINARYSEARCHTREE_H_ */

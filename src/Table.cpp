@@ -2,7 +2,7 @@
  * Table.cpp
  *
  *  Created on: 5 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 
 #include "Table.h"
@@ -11,31 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-//#include <windows.h>
 using namespace std;
-
-//https://stackoverflow.com/questions/1739259/how-to-use-queryperformancecounter
-
-//double PCFreq = 0.0;
-//__int64 CounterStart = 0;
-
-//void StartCounterTime(){
-//	LARGE_INTEGER li;
-//	if(!QueryPerformanceCounter(&li)){
-//		cout << "Blad" << endl;
-//	}
-//
-//	PCFreq = double(li.QuadPart)/1000.0;
-//
-//	QueryPerformanceCounter(&li);
-//	CounterStart = li.QuadPart;
-//}
-//
-//void GetCounterTime(){
-//	LARGE_INTEGER li;
-//	QueryPerformanceCounter(&li);
-//	cout << "Czas: " << double(li.QuadPart-CounterStart)/PCFreq << endl;
-//}
 
 Table::Table() {
 	this->size = 0;
@@ -211,12 +187,22 @@ int main(int argc, char **args){
 	int size;
 	sscanf(args[1], "%d", &size);
 
-	for(int i=0; i< size; i++){
+	for(int i = 0; i < size; i++){
 		randvalue = rand();
-		table.addAtFirst(randvalue);
+		// table.addAtIndex(randvalue,);
 	}
 
 
+	// for(int i = 0; i < size; i++){
+	// 	randvalue = rand();
+	// 	table.searching(randvalue);
+	// }
+
+
+	// table.addAtIndex(randvalue,); 1000 30000 po 1000
+	// table.searching(randvalue); 1000 30000 po 1000 z dodawaniem
+	// table.deleteAtFirst(); 1000 30000 po 1000 z dodawaniem
+	// table.addAtFirst(randvalue); 1000 30000 po 1000
 	// cout<<table<<endl;
 
 	// table.addAtFirst(5);

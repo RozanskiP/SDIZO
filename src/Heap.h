@@ -18,7 +18,7 @@ public:
 	int reallocsize;
 public:
 	Heap();
-	virtual ~Heap();
+	~Heap();
 	void deleteStructure();
 	void realloc();
 	void addNode(int value);

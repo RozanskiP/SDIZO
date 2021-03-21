@@ -2,7 +2,7 @@
  * Main.cpp
  *
  *  Created on: 6 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 #include <iostream>
 #include <stdlib.h>

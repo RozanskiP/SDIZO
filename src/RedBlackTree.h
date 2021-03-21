@@ -33,6 +33,9 @@ private:
 	void leftRotation(RedBlackTreeNode *forRotat);
 	void addNodeFixUp(RedBlackTreeNode *& node);
 	void deleteNodeFixUp(RedBlackTreeNode *& node);
+	RedBlackTreeNode *minimum(RedBlackTreeNode *node);
+	RedBlackTreeNode *maximum(RedBlackTreeNode *node);
+	RedBlackTreeNode *succesor(RedBlackTreeNode *node);
 public:
 	RedBlackTree();
 	~RedBlackTree();
