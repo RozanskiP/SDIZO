@@ -65,13 +65,21 @@ void RedBlackTree::deleteStructureButDoNew(RedBlackTreeNode *node){
 }
 
 RedBlackTreeNode *RedBlackTree::minimum(RedBlackTreeNode *node){
-	if(node == this->nullLeaf){ //sprawdza czy drzewo nie jest poste jesli tak to wraca podany wezel
-		return node;
+	// if(node == this->nullLeaf){ //sprawdza czy drzewo nie jest poste jesli tak to wraca podany wezel
+	// 	return node;
+	// }
+	// while(node->left != nullLeaf){//przechodz cały czas na lewo jesli nie ma prawego to ten jest najmniejszy
+	// 	node = node->left;
+	// }
+	// return node;
+	cout << "MINIMUM1: " << node->key << endl;
+	 if( node != this->nullLeaf ){
+		while( node->left != this->nullLeaf ) {
+			node = node->left;
+			cout << "MINIMUM2: " << node->key << endl;
+		}
 	}
-	while(node->left != nullLeaf){//przechodz cały czas na lewo jesli nie ma prawego to ten jest najmniejszy
-		node = node->left;
-	}
-	return node;
+  	return node;
 }
 
 RedBlackTreeNode *RedBlackTree::maximum(RedBlackTreeNode *node){
@@ -85,63 +93,72 @@ RedBlackTreeNode *RedBlackTree::maximum(RedBlackTreeNode *node){
 }
 
 RedBlackTreeNode *RedBlackTree::succesor(RedBlackTreeNode *node){
-	if(node == this->nullLeaf){ // jesli drzewo jest puste to zwroc wartosc podana
-		return node;
-	}
-	if(node->right != this->nullLeaf){ //jesli ma prawego syna to on jest nastepnikiem
-		return minimum(node);
-	}else{ // jesli nie ma to wtedy idzimey w gore drzewa sprawdzajac czy idziemy z lewego syna
-		RedBlackTreeNode *temp = node->parent;
-		while((temp->right == node) && (temp != this->nullLeaf)){
-			node = temp;
-			temp = temp->parent;
+	RedBlackTreeNode * r;
+
+	if( node != this->nullLeaf )
+	{
+	if( node->right != this->nullLeaf ) return minimum ( node->right );
+	else
+	{
+		r = node->parent;
+		while( ( r != this->nullLeaf ) && ( node == r->right ) )
+		{
+		node = r;
+		r = r->parent;
 		}
-		return temp;
+		return r;
 	}
+	}
+	return this->nullLeaf;
 }
 
 void RedBlackTree::rightRotation(RedBlackTreeNode *forRotat){
 	RedBlackTreeNode *leftson = forRotat->left;
 	// cout << "Rotuje w prawo!" << endl;
-	forRotat->left = leftson->right; // przypisz prawego syna 
-	if(leftson->right != this->nullLeaf){ //jesli nie byl rowny zero to przypisz mu rodzica
-		leftson->right->parent = forRotat;
-	}
-	leftson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
 
-	if (forRotat->parent == nullptr) {//jesli byl korzeniem to korzen zmienia swoja wartosc
-		this->root = leftson;
-	} else if (forRotat == forRotat->parent->right) {//przypisanie do rodzica czy jest to jego prawy czy lewy syn
-		forRotat->parent->right = leftson;
-	} else {
-		forRotat->parent->left = leftson;
-	}
+	if(leftson != this->nullLeaf){
+		forRotat->left = leftson->right; // przypisz prawego syna 
+		if(leftson->right != this->nullLeaf){ //jesli nie byl rowny zero to przypisz mu rodzica
+			leftson->right->parent = forRotat;
+		}
+		leftson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
 
-	leftson->right = forRotat; //przypisanie lewego syna do wezla syna
-	forRotat->parent = leftson;
+		if (forRotat->parent == nullptr) {//jesli byl korzeniem to korzen zmienia swoja wartosc
+			this->root = leftson;
+		} else if (forRotat == forRotat->parent->right) {//przypisanie do rodzica czy jest to jego prawy czy lewy syn
+			forRotat->parent->right = leftson;
+		} else {
+			forRotat->parent->left = leftson;
+		}
+
+		leftson->right = forRotat; //przypisanie lewego syna do wezla syna
+		forRotat->parent = leftson;
+	}
 }
 
 void RedBlackTree::leftRotation(RedBlackTreeNode *forRotat){
 	RedBlackTreeNode *rightson = forRotat->right;
 	//cout << "Rotuje w lewo!" << endl;
-	forRotat->right = rightson->left; // przypisz prawego syna 
-	if(rightson->left != this->nullLeaf){ //jesli nie byl rowny zero to przypisz mu rodzica
-		rightson->left->parent = forRotat;
-	}
-	rightson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
-	//cout << "@@@@" << endl;
-	if (forRotat->parent == nullptr) { //jesli byl korzeniem to korzen zmienia swoja wartosc
-		this->root = rightson;
-	} else if (forRotat == forRotat->parent->left) { //przypisanie do rodzica czy jest to jego prawy czy lewy syn
-		forRotat->parent->left = rightson;
-	} else {
-		forRotat->parent->right = rightson;
-	}
+	if(rightson != this->nullLeaf){
+		forRotat->right = rightson->left; // przypisz prawego syna 
+		if(rightson->left != this->nullLeaf){ //jesli nie byl rowny zero to przypisz mu rodzica
+			rightson->left->parent = forRotat;
+		}
+		rightson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
+		//cout << "@@@@" << endl;
+		if (forRotat->parent == nullptr) { //jesli byl korzeniem to korzen zmienia swoja wartosc
+			this->root = rightson;
+		} else if (forRotat == forRotat->parent->left) { //przypisanie do rodzica czy jest to jego prawy czy lewy syn
+			forRotat->parent->left = rightson;
+		} else {
+			forRotat->parent->right = rightson;
+		}
 
-	rightson->left = forRotat; //przypisanie lewego syna do wezla syna
-	forRotat->parent = rightson;
-	// show();
-	// cout << "!!!!" << endl;
+		rightson->left = forRotat; //przypisanie lewego syna do wezla syna
+		forRotat->parent = rightson;
+		// show();
+		// cout << "!!!!" << endl;
+	}
 }
 
 void RedBlackTree::addNodeFixUp(RedBlackTreeNode *& node){
@@ -230,70 +247,66 @@ void RedBlackTree::addNode(int value){
 	addNodeFixUp(node);
 }
 
-void RedBlackTree::deleteNodeFixUp(RedBlackTreeNode *& node){
-
-	cout << "Naprawiam!" << endl;
+void RedBlackTree::deleteNodeFixUp(RedBlackTreeNode *& node){ //ZAPODOBNE
+	// cout << "Naprawiam!" << endl;
 	RedBlackTreeNode *brother;
 	while(node != this->root && node->color == 'B'){
-		
 		if(node == node->parent->left){ // przypadki gdy nasz wezel jest lewym synem
 			brother = node->parent->right; //przypisujemy do zmiennej brother wartosc brata naszego wezla
 			//1 przypadek gdy brat (brother) jest czerwony
 			if(brother->color == 'R'){
 				brother->color = 'B'; //zamiana kolorów
 				node->parent->color = 'R';
-				leftRotation(brother); //rotacja w lewo
+				leftRotation(node->parent); //rotacja w lewo
 				brother = node->parent->right; //przypisanie nowej wartosci dla kolejnych obliczen 
 			}
 			//2 przypadek gdy brat (brother) jest czarny i jego synowie tez sa czarnii
 			if(brother->left->color == 'B' && brother->right->color == 'B'){
 				brother->color = 'R'; //zmiana koloru na czerwony
 				node = node->parent; //przesuniecie wartosci node do rodzica i wykonanie kolejnej petli
+				continue;
 			}
-			else{
-				//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
-				if(brother->right->color == 'B'){
-					brother->left->color = 'B'; //zmiana koloru  lewego syna na czarny
-					brother->color = 'R'; // zmiana koloru brata na czerwony
-					rightRotation(brother); //rotacja prawostronan
-					brother = node->parent->right;  //nowa wartosc brata 
-				} // przekstalcenie naszego przypadku 3 na przypadek 4 i tutaj go dopiero zmieniamy
-				//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
-				brother->color = node->parent->color;
-				node->parent->color = 'B';
-				brother->right->color= 'B';
-				leftRotation(node->parent);
-				node = this->root; // ten warunek zakonczy nasza petle
-			}
+			//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
+			if(brother->right->color == 'B'){
+				brother->left->color = 'B'; //zmiana koloru  lewego syna na czarny
+				brother->color = 'R'; // zmiana koloru brata na czerwony
+				rightRotation(brother); //rotacja prawostronan
+				brother = node->parent->right;  //nowa wartosc brata 
+			} // przekstalcenie naszego przypadku 3 na przypadek 4 i tutaj go dopiero zmieniamy
+			//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
+			brother->color = node->parent->color;
+			node->parent->color = 'B';
+			brother->right->color= 'B';
+			leftRotation(node->parent);
+			node = this->root; // ten warunek zakonczy nasza petle
 		}else{// przypadki (lustrzane / symetryczne) gdy nasz wezel jest prawym synem
 			brother = node->parent->left; //przypisujemy do zmiennej brother wartosc brata naszego wezla
 			//1 przypadek gdy brat (brother) jest czerwony
 			if(brother->color == 'R'){
 				brother->color = 'B'; //zamiana kolorów
 				node->parent->color = 'R';
-				rightRotation(brother); //rotacja w lewo
+				rightRotation(node->parent); //rotacja w lewo
 				brother = node->parent->left; //przypisanie nowej wartosci dla kolejnych obliczen 
 			}
 			//2 przypadek gdy brat (brother) jest czarny i jego synowie tez sa czarnii
 			if(brother->left->color == 'B' && brother->right->color == 'B'){
 				brother->color = 'R'; //zmiana koloru na czerwony
 				node = node->parent;
+				continue;
 			}
-			else{
 			//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
-				if(brother->left->color == 'B'){
-					brother->right->color = 'B';
-					brother->color = 'R';
-					leftRotation(brother);
-					brother = node->parent->left;
-				}
-				//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
-				brother->color = node->parent->color;
-				node->parent->color = 'B';
-				brother->right->color= 'B';
-				rightRotation(node->parent);
-				node = this->root;
+			if(brother->left->color == 'B'){
+				brother->right->color = 'B';
+				brother->color = 'R';
+				leftRotation(brother);
+				brother = node->parent->left;
 			}
+			//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
+			brother->color = node->parent->color;
+			node->parent->color = 'B';
+			brother->left->color= 'B';
+			rightRotation(node->parent);
+			node = this->root;
 		}
 	}
 }
@@ -311,6 +324,7 @@ void RedBlackTree::deleteNode(int value){
 	}else{
 		temp = succesor(node); // w przeciwnym przypadku będzie usuwany nastepnik naszego wezla
 	}
+	cout << "succesor: " << temp->key << endl;
 
 	if(temp->left != this->nullLeaf){ // jesli ma 2 synow to sprawdzamy czy to prawy czy lewy syn do zamiany
 		tempToChange = temp->left;
@@ -321,7 +335,7 @@ void RedBlackTree::deleteNode(int value){
 	tempToChange->parent = temp->parent; //zamieniamy ojca wezla ktory bedziemy przenosic  na ojca ktorego mial wezel do usuniecia
 
 	if(temp->parent == this->nullLeaf){ // jesli byly 2 elementy to teraz nowym rootem bedziesz nasz wezel nastepnik
-		root = tempToChange;
+		this->root = tempToChange;
 	}else if(temp == temp->parent->left){ //jezeli byl jego lewym dzieckiem to bedzie znowu lewym
 		temp->parent->left = tempToChange;
 	}else{								// w przeciwym wypadku bedzie tak samo jak wczesniej prawym synem
@@ -331,11 +345,11 @@ void RedBlackTree::deleteNode(int value){
 	if(temp != node){ // jesli nie jest rowny poprzednikowi to daj zmien na nowa wartosc
 		node->key = temp->key;
 	}
-	cout << "temp->color: " << temp->color << endl;
 	if(temp->color == 'B'){ // jesli zmieniony wezel ma color czarny to musimy naprawiac
 		deleteNodeFixUp(tempToChange);	
 	}
 	tempToChange->color = 'B';
+	show();
 	delete temp;
 }
 
@@ -344,15 +358,17 @@ RedBlackTreeNode * RedBlackTree::searching(int elem){
 
 	while(node != this->nullLeaf){
 		if(node->key == elem){
-			cout << "Znalazlem taki element" << endl;
+			cout << "Znalazlem taki element: " << node->key << endl;
 			return node;
 		}else if(node->key > elem){
 			node = node->left;
+			// cout << "node left: " << node->key << endl;
 		}else{
 			node = node->right;
+			// cout << "node right: " << node->key << endl;
 		}
 	}
-	cout << "Nie ma takiego elementu" << endl;
+	cout << "Nie ma takiego elementu o wartosci: " << elem << endl;
 	return NULL;
 }
 
@@ -482,7 +498,9 @@ int main(void){
 
 
 	RBTree.show();
-
+	// RBTree.searching(9);
+	// RBTree.searching(8);
+	// RBTree.searching(7);
  
 // 18 10 2 13 3
 	RBTree.deleteNode(18);
@@ -494,6 +512,13 @@ int main(void){
 	RBTree.deleteNode(5);
 	RBTree.deleteNode(29);
 	RBTree.deleteNode(9);
+	
+	// RedBlackTreeNode *numb7 = RBTree.searching(7);
+	// cout << "numb7->left->key: " << numb7->left->key << endl;
+	// cout << "numb7->left->right->key: " << numb7->left->right->key << endl;
+
+	// cout << "SZUKAM: " << endl;
+	// RBTree.show();
 	RBTree.deleteNode(30);
 	RBTree.deleteNode(6);
 // 19 28 26 25 21 
@@ -504,8 +529,11 @@ int main(void){
 	RBTree.deleteNode(21);
 // 7	
 	RBTree.deleteNode(7);
-
 	RBTree.show();
+
+	
+
+	// RBTree.show();
 
 	//const char * filename = "DaneTablica.txt";
 
