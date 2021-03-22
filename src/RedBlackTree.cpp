@@ -72,11 +72,11 @@ RedBlackTreeNode *RedBlackTree::minimum(RedBlackTreeNode *node){
 	// 	node = node->left;
 	// }
 	// return node;
-	cout << "MINIMUM1: " << node->key << endl;
+	// cout << "MINIMUM1: " << node->key << endl;
 	 if( node != this->nullLeaf ){
 		while( node->left != this->nullLeaf ) {
 			node = node->left;
-			cout << "MINIMUM2: " << node->key << endl;
+			// cout << "MINIMUM2: " << node->key << endl;
 		}
 	}
   	return node;
@@ -316,6 +316,24 @@ void RedBlackTree::deleteNode(int value){
 	if(node == NULL || node == this->nullLeaf){
 		return;
 	}
+	if(node == this->root && node->left == this->nullLeaf && node->right == this->nullLeaf){ //przypadek z korzeniem
+		delete node;
+		this->root = this->nullLeaf;
+		return;
+	}
+
+	if(node == this->root && node->left->left == this->nullLeaf && node->left->right == this->nullLeaf && node->right == this->nullLeaf)  { //warunki do naprawienia
+		delete node->left;
+		this->root->left = this->nullLeaf;
+		return;
+	} // gdy ma 2 wartosci jedna po lewej stronie i probuje usunac wartosc z wezla 
+
+	if(node == this->root && node->right->left == this->nullLeaf && node->right->right == this->nullLeaf && node->left == this->nullLeaf)  { //warunki do naprawienia
+		delete node->right;
+		this->root->right = this->nullLeaf;
+		return;
+	}// gdy ma 2 wartosci jedna po prawej stronie i probuje usunac wartosc z wezla
+
 	RedBlackTreeNode *temp;
 	RedBlackTreeNode *tempToChange;
 
@@ -324,8 +342,7 @@ void RedBlackTree::deleteNode(int value){
 	}else{
 		temp = succesor(node); // w przeciwnym przypadku będzie usuwany nastepnik naszego wezla
 	}
-	cout << "succesor: " << temp->key << endl;
-
+	
 	if(temp->left != this->nullLeaf){ // jesli ma 2 synow to sprawdzamy czy to prawy czy lewy syn do zamiany
 		tempToChange = temp->left;
 	}else{
@@ -333,7 +350,7 @@ void RedBlackTree::deleteNode(int value){
 	}
 
 	tempToChange->parent = temp->parent; //zamieniamy ojca wezla ktory bedziemy przenosic  na ojca ktorego mial wezel do usuniecia
-
+	
 	if(temp->parent == this->nullLeaf){ // jesli byly 2 elementy to teraz nowym rootem bedziesz nasz wezel nastepnik
 		this->root = tempToChange;
 	}else if(temp == temp->parent->left){ //jezeli byl jego lewym dzieckiem to bedzie znowu lewym
@@ -349,7 +366,6 @@ void RedBlackTree::deleteNode(int value){
 		deleteNodeFixUp(tempToChange);	
 	}
 	tempToChange->color = 'B';
-	show();
 	delete temp;
 }
 
@@ -443,93 +459,96 @@ int main(void){
 	RedBlackTree RBTree;
 
 
-	// srand(time(NULL));
-	// int randvalue = 0;
-	// int size = 50;
+	srand(time(NULL));
+	int randvalue = 0;
+	int size = 1000000;
 
-	// for(int i = 0; i < 31; i++){
-	// 	cout << "LICZBA: "  << i << endl;
-	// 	RBTree.addNode(i);
-	// }
-	//RBTree.show();
-	// cout << "====================================================" << endl;
-	// for(int i = 10; i < 21; i++){
-	// 	cout << "LICZBA: "  << i << endl;
-	// 	RBTree.deleteNode(i);
-	// }
+	for(int i = 0; i < size; i++){
+		RBTree.addNode(i);
+	}
 	// RBTree.show();
+	for(int i = size-1; i >= 0; i--){
+		RBTree.deleteNode(i);
+	}
 
-// 3 25 14 29 10 
-	RBTree.addNode(3);
-	RBTree.addNode(25);
-	RBTree.addNode(14);
-	RBTree.addNode(29);
-	RBTree.addNode(10);
-// 17 23 2 11 1 
-	RBTree.addNode(17);
-	RBTree.addNode(23);
-	RBTree.addNode(2);
-	RBTree.addNode(11);
-	RBTree.addNode(1);
-// 15 16 21 6 8 
-	RBTree.addNode(15);
-	RBTree.addNode(16);
-	RBTree.addNode(21);
-	RBTree.addNode(6);
-	RBTree.addNode(8);
-// 20 27 24 4 5 
-	RBTree.addNode(20);
-	RBTree.addNode(27);
-	RBTree.addNode(24);
-	RBTree.addNode(4);
-	RBTree.addNode(5);
-// 22 7 13 9 26 
-	RBTree.addNode(22);
-	RBTree.addNode(7);
-	RBTree.addNode(13);
-	RBTree.addNode(9);
-	RBTree.addNode(26);
-// 28 12 30 18 19
-	RBTree.addNode(28);
-	RBTree.addNode(12);
-	RBTree.addNode(30);
-	RBTree.addNode(18);
-	RBTree.addNode(19);
+// // 3 25 14 29 10 
+// 	RBTree.addNode(3);
+// 	RBTree.addNode(25);
+	// RBTree.addNode(14);
+	// RBTree.addNode(29);
+	// RBTree.addNode(10);
+// // 17 23 2 11 1 
+// 	RBTree.addNode(17);
+// 	RBTree.addNode(23);
+// 	RBTree.addNode(2);
+// 	RBTree.addNode(11);
+// 	RBTree.addNode(1);
+// // 15 16 21 6 8 
+// 	RBTree.addNode(15);
+// 	RBTree.addNode(16);
+// 	RBTree.addNode(21);
+// 	RBTree.addNode(6);
+// 	RBTree.addNode(8);
+// // 20 27 24 4 5 
+// 	RBTree.addNode(20);
+// 	RBTree.addNode(27);
+// 	RBTree.addNode(24);
+// 	RBTree.addNode(4);
+// 	RBTree.addNode(5);
+// // 22 7 13 9 26 
+// 	RBTree.addNode(22);
+	// RBTree.addNode(7);
+	// RBTree.addNode(13);
+	// RBTree.addNode(9);
+	// RBTree.addNode(26);
+// // 28 12 30 18 19
+// 	RBTree.addNode(28);
+// 	RBTree.addNode(12);
+// 	RBTree.addNode(30);
+// 	RBTree.addNode(18);
+// 	RBTree.addNode(19);
 
 
-	RBTree.show();
-	// RBTree.searching(9);
-	// RBTree.searching(8);
-	// RBTree.searching(7);
+// 	RBTree.show();
+	// RBTree.searching(14);
+	// RBTree.searching(29);
+// 	// RBTree.searching(7);
  
-// 18 10 2 13 3
-	RBTree.deleteNode(18);
-	RBTree.deleteNode(10);
-	RBTree.deleteNode(2);
-	RBTree.deleteNode(13);
-	RBTree.deleteNode(3);
-// 5 29 9 30 6 
-	RBTree.deleteNode(5);
-	RBTree.deleteNode(29);
-	RBTree.deleteNode(9);
-	
-	// RedBlackTreeNode *numb7 = RBTree.searching(7);
-	// cout << "numb7->left->key: " << numb7->left->key << endl;
-	// cout << "numb7->left->right->key: " << numb7->left->right->key << endl;
-
-	// cout << "SZUKAM: " << endl;
+// // 18 10 2 13 3
 	// RBTree.show();
-	RBTree.deleteNode(30);
-	RBTree.deleteNode(6);
-// 19 28 26 25 21 
-	RBTree.deleteNode(19);
-	RBTree.deleteNode(28);
-	RBTree.deleteNode(26);
-	RBTree.deleteNode(25);
-	RBTree.deleteNode(21);
-// 7	
-	RBTree.deleteNode(7);
-	RBTree.show();
+	// cout << "-----------------" << endl;
+	// RBTree.deleteNode(14);
+	// RBTree.show();
+	// cout << "-----------------" << endl;
+	// RBTree.deleteNode(10);
+	// RBTree.show();
+	// cout << "-----------------" << endl;
+	// RBTree.deleteNode(29);
+	// RBTree.show();
+// 	RBTree.deleteNode(13);
+// 	RBTree.deleteNode(3);
+// // 5 29 9 30 6 
+// 	RBTree.deleteNode(5);
+// 	RBTree.deleteNode(29);
+// 	RBTree.deleteNode(9);
+	
+// 	// RedBlackTreeNode *numb7 = RBTree.searching(7);
+// 	// cout << "numb7->left->key: " << numb7->left->key << endl;
+// 	// cout << "numb7->left->right->key: " << numb7->left->right->key << endl;
+
+// 	// cout << "SZUKAM: " << endl;
+// 	// RBTree.show();
+// 	RBTree.deleteNode(30);
+// 	RBTree.deleteNode(6);
+// // 19 28 26 25 21 
+// 	RBTree.deleteNode(19);
+// 	RBTree.deleteNode(28);
+// 	RBTree.deleteNode(26);
+// 	RBTree.deleteNode(25);
+// 	RBTree.deleteNode(21);
+// // 7	
+// 	RBTree.deleteNode(7);
+	
 
 	
 

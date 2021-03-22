@@ -70,7 +70,6 @@ void List::AddRandomToTesting(int size, int start, int end){
 
 void List::addAtFirst(int value){
 	Node *node = new Node();
-
 	node->next = head;
 	node->prev = NULL;
 
@@ -192,7 +191,6 @@ void List::searching(int value){
 		}
 		temp = temp->next;
 	}
-
 	if(counter != 0){
 		cout << "W tablicy znajduje sie taki element."<<endl;
 	}else{
