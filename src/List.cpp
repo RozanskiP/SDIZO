@@ -2,7 +2,7 @@
  * List.cpp
  *
  *  Created on: 5 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 
 #include "List.h"
