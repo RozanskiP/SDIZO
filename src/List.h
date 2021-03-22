@@ -2,7 +2,7 @@
  * List.h
  *
  *  Created on: 5 mar 2021
- *      Author: Pawe�
+ *      Author: Pawel
  */
 
 #ifndef LIST_H_

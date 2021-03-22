@@ -69,15 +69,15 @@ void List::AddRandomToTesting(int size, int start, int end){
 }
 
 void List::addAtFirst(int value){
-	Node *node = new Node();
-	node->next = head;
-	node->prev = NULL;
+	Node *node = new Node(); //towrzymy nowe element
+	node->next = head;	// przypisujemy stary element głowy do naszego elementu
+	node->prev = NULL;	// nasz element bedzie teraz głowa czyli nie bedzie mial poprzedniego
 
-	if(head){
-		head->prev = node;
+	if(head){ // jezeli mielismy glowe wczesniej czyli nie byla zerowa tablica 
+		head->prev = node; //to przypisujemy do glowy wartosc poprzednia czyli nasz element
 	}
-	head = node;
-	node->value = value;
+	head = node; // zmienaimy wartosc w polu klasy head na node
+	node->value = value; //przypisujemy wartosc
 }
 
 void List::addAtEnd(int value){
@@ -103,7 +103,6 @@ void List::addAtIndex(int value, int index){
 	}
 
 	Node * node = new Node();
-	temp = head;
 	if(counter < index){ //to dodaj na koniec listy
 		addAtEnd(value);
 	}else if(index == 0){ //jesli index zero to wstaw na poczatek
@@ -221,10 +220,8 @@ void List::loadDataFromFile(const char * filename){
 		while(getline(file, line) && i < newSize){
 			tempvalue = atoi(line.c_str());
 			node = new Node();
-
 			node->next = head;
 			node->prev = NULL;
-
 			if(head){
 				head->prev = node;
 			}
@@ -240,18 +237,24 @@ void List::show(){ //TODO Wyswietlanie od tylu i od przodu
 	if(!node){
 		cout << "Lista jest pusta" <<endl;
 	}else{
-		int counter = 0;
-		cout << "Od przodu: ";
+		int counter=0;
+		cout << "Od przodu: " << endl;
 		while(node){
 			cout  << node->value <<" ";
 			node = node->next;
 			counter++;
 		}
-		cout << "Od tyłu: ";
+		cout << endl;
+		cout << "Od tyłu: " << endl;
+		node = head;
+		counter--;
+		while(counter != 0){
+			node = node->next;
+			counter--;
+		}
 		while(node){
 			cout  << node->value <<" ";
-			node = node->next;
-			counter++;
+			node = node->prev;
 		}
 		cout << endl;
 	}
@@ -263,13 +266,14 @@ int main(int argc, char **args){
 
 	srand(time(NULL));
 	int randvalue = 0;
-	int size;
-	sscanf(args[1], "%d", &size);
+	int size = 10;
+	// sscanf(args[1], "%d", &size);
 
 	for(int i=0; i < size; i++){
 		randvalue = rand();
-		list.addAtFirst(randvalue);
+		list.addAtFirst(i);
 	}
+	list.show();
 
 
 // 	cout << "D1zialam" <<endl;
