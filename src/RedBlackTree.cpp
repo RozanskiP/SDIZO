@@ -452,24 +452,24 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 	}
 }
 
-int main(void){
-	cout << "Zaczynam" << endl;
+// int main(void){
+// 	cout << "Zaczynam" << endl;
 
-	//cout << "┌ │ └  ─" << endl;
-	RedBlackTree RBTree;
+// 	//cout << "┌ │ └  ─" << endl;
+// 	RedBlackTree RBTree;
 
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int size = 1000000;
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int size = 1000000;
 
-	for(int i = 0; i < size; i++){
-		RBTree.addNode(i);
-	}
-	// RBTree.show();
-	for(int i = size-1; i >= 0; i--){
-		RBTree.deleteNode(i);
-	}
+// 	for(int i = 0; i < size; i++){
+// 		RBTree.addNode(i);
+// 	}
+// 	// RBTree.show();
+// 	for(int i = size-1; i >= 0; i--){
+// 		RBTree.deleteNode(i);
+// 	}
 
 // // 3 25 14 29 10 
 // 	RBTree.addNode(3);
@@ -564,7 +564,7 @@ int main(void){
 
 	//RBTree.show();
 
-	cout << "Koncze" << endl;
+// 	cout << "Koncze" << endl;
 
-	return 0;
-}
+// 	return 0;
+// }

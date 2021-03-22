@@ -220,6 +220,7 @@ BSTNode * BinarySearchTree::searching(int value){
 		}
 	}
 	cout << "Nie ma takiej liczby" << endl;
+	return NULL;
 }
 
 void BinarySearchTree::rightRotation(BSTNode *tempRoot, BSTNode *& root){ //rotacja w prawo potrzebna dla alrogrytmu DSW

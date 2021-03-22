@@ -94,30 +94,31 @@ void List::addAtEnd(int value){
 }
 
 void List::addAtIndex(int value, int index){
-	Node *temp = head;
-
-	int counter = 0;
-	while(temp->next != NULL){
-		++counter;
-		temp = temp->next;
-	}
-
-	Node * node = new Node();
-	if(counter < index){ //to dodaj na koniec listy
-		addAtEnd(value);
-	}else if(index == 0){ //jesli index zero to wstaw na poczatek
+	if(index <= 0){
 		addAtFirst(value);
-	}else{ //to wstaw na index
-		counter = 2;
-		while(counter <= index){
-			temp = temp->next;
-			++counter;
+		return;
+	}
+	Node *temp = head;
+	Node * node = new Node();
+	node ->value = value;
+	int i = 0;
+	
+	while(temp != NULL){
+		if(temp->next == NULL){
+			cout << "temp" << endl;
+			temp->next = node;
+			node->prev = temp;
+			return;
 		}
-		node->next = temp->next;
-		temp->next->prev = node;
-		node->prev = temp;
-		temp->next = node;
-		node->value = value;
+		if(i == index){
+			temp->prev->next = node;
+			node->next = temp;
+			node->prev = temp->prev;
+			temp->prev = node;
+			return;
+		}
+		i++;
+		temp = temp->next;
 	}
 }
 
@@ -147,6 +148,26 @@ void List::deleteAtEnd(){
 		lastnode = lastnode->prev;
 		lastnode->next = NULL;
 		delete temp;
+	}
+}
+
+void List::deleteAtKey(int key){
+	Node *temp = head;
+	while(temp != NULL){
+		if(temp->value == key){
+			if(temp == head){
+				head = temp->next;
+			}
+			if(temp->next != NULL){
+				temp->next->prev = temp->prev;
+			}
+			if(temp->prev != NULL){
+				temp->prev->next = temp->next;
+			}
+			delete temp;
+			break;
+		}
+		temp = temp->next;
 	}
 }
 
@@ -180,21 +201,17 @@ void List::deleteAtIndex(int index){
 	}
 }
 
-void List::searching(int value){
+Node *List::searching(int value){
 	int counter = 0;
 
 	Node *temp = head;
 	while(temp != NULL){
 		if(temp->value == value){
-			++counter;
+			return temp;
 		}
 		temp = temp->next;
 	}
-	if(counter != 0){
-		cout << "W tablicy znajduje sie taki element."<<endl;
-	}else{
-		cout << "Nie ma takiej liczby"<<endl;
-	}
+	return NULL;
 }
 
 void List::loadDataFromFile(const char * filename){
@@ -220,13 +237,14 @@ void List::loadDataFromFile(const char * filename){
 		while(getline(file, line) && i < newSize){
 			tempvalue = atoi(line.c_str());
 			node = new Node();
-			node->next = head;
-			node->prev = NULL;
-			if(head){
-				head->prev = node;
+			Node* temp = head;
+			while(temp->next != NULL){
+				temp = temp->next;
 			}
-			head = node;
 			node->value = tempvalue;
+			node->next = NULL;
+			temp->next = node;
+			node->prev = temp;
 			i++;
 		}
 	}
@@ -260,60 +278,60 @@ void List::show(){ //TODO Wyswietlanie od tylu i od przodu
 	}
 }
 
-int main(int argc, char **args){
+// int main(int argc, char **args){
 
-	List list;
+// 	List list;
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int size = 10;
-	// sscanf(args[1], "%d", &size);
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int size = 10;
+// 	// sscanf(args[1], "%d", &size);
 
-	for(int i=0; i < size; i++){
-		randvalue = rand();
-		list.addAtFirst(i);
-	}
-	list.show();
-
-
-// 	cout << "D1zialam" <<endl;
-
-// 	list.addAtFirst(5);
-// 	list.addAtFirst(10);
-// 	list.addAtFirst(11);
-
-// 	list.addAtEnd(33);
-
-// 	list.addAtFirst(121);
-// 	list.addAtEnd(3333);
-
-// 	list.addAtIndex(111111, 2);
-// 	list.show();
-// 	list.deleteAtEnd();
-// 	list.deleteAtEnd();
-// 	list.deleteAtFirst();
-// 	list.deleteAtFirst();
-
-// 	list.deleteAtIndex(6);
-
-// 	cout << "_________________________" << endl;
+// 	for(int i=0; i < size; i++){
+// 		randvalue = rand();
+// 		list.addAtFirst(i);
+// 	}
 // 	list.show();
 
-// 	list.searching(10);
-// 	list.searching(5);
 
-// 	const char * filename = "DaneTablica.txt";
-// 	list.loadDataFromFile(filename);
-// 	list.show();
-// 	cout << "_________________________" << endl;
-// 	list.AddRandomToTesting(5, 0, 1000);
-// 	list.show();
-// 	cout << endl;
-// 	list.deleteAtEnd();
-// 	list.deleteAtEnd();
-// 	list.show();
+// // 	cout << "D1zialam" <<endl;
 
-// 	cout << "Koniec" <<endl;
+// // 	list.addAtFirst(5);
+// // 	list.addAtFirst(10);
+// // 	list.addAtFirst(11);
 
-	return 0;
-}
+// // 	list.addAtEnd(33);
+
+// // 	list.addAtFirst(121);
+// // 	list.addAtEnd(3333);
+
+// // 	list.addAtIndex(111111, 2);
+// // 	list.show();
+// // 	list.deleteAtEnd();
+// // 	list.deleteAtEnd();
+// // 	list.deleteAtFirst();
+// // 	list.deleteAtFirst();
+
+// // 	list.deleteAtIndex(6);
+
+// // 	cout << "_________________________" << endl;
+// // 	list.show();
+
+// // 	list.searching(10);
+// // 	list.searching(5);
+
+// // 	const char * filename = "DaneTablica.txt";
+// // 	list.loadDataFromFile(filename);
+// // 	list.show();
+// // 	cout << "_________________________" << endl;
+// // 	list.AddRandomToTesting(5, 0, 1000);
+// // 	list.show();
+// // 	cout << endl;
+// // 	list.deleteAtEnd();
+// // 	list.deleteAtEnd();
+// // 	list.show();
+
+// // 	cout << "Koniec" <<endl;
+
+// 	return 0;
+// }

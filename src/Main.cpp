@@ -69,9 +69,9 @@ void menuTable(){
 				table.show();
 				break;
 			case '2': //usuwanie elementu
-				cout << "Podaj index: ";
+				cout << "Podaj wartosc: ";
 				cin >> index;
-				table.deleteAtIndex(index);
+				table.deleteAtKey(index);
 				table.show();
 				break;
 			case '3': //dodawanie elemntu
@@ -114,6 +114,7 @@ void menuList(){
 		displayMenu(" -->MENU LISTA<-- ");
 		cin >> opt;
 		cout << endl;
+		Node * node;
 
 		switch(opt){
 			case '1': //wczytywanie elementow z pliku
@@ -123,9 +124,9 @@ void menuList(){
 				list.show();
 				break;
 			case '2': //usuwanie elementu
-				cout << "Podaj index: ";
-				cin >> index;
-				list.deleteAtIndex(index);
+				cout << "Podaj wartosc do usuniecia: ";
+				cin >> value;
+				list.deleteAtKey(value);
 				list.show();
 				break;
 			case '3': //dodawanie elemntu
@@ -139,7 +140,12 @@ void menuList(){
 			case '4': //wyszukiwanie elemnetu
 				cout << "Podaj wartosc: ";
 				cin >> value;
-				list.searching(value);
+				node = list.searching(value);
+				if(node == NULL){
+					cout << "W liście nie ma takiego elementu"<< endl;
+				}else{
+					cout << "W liście znajduje sie taki element"<< endl;
+				}
 				break;
 			case '5': //generowanie elementow
 				cout << "Podaj ilosc elemenow tablicy: ";
@@ -349,7 +355,6 @@ int main(void){
 	char choose;
 
 	do{
-		choose = NULL;
 		cout << endl;
 		cout << "		MENU GLOWNE" <<endl;
 		cout << "1 <- Tablica" <<endl;

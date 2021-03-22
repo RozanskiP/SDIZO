@@ -45,21 +45,6 @@ void Table::resize(int newSize){
 	delete [] temp;
 }
 
-void Table::AddRandomToTesting(int newSize, int start, int end){
-	deleteStructure();
-	this->table = new int[newSize];
-	this->size = newSize;
-
-	srand(time(NULL));
-	int randvalue = 0;
-
-	int i;
-	for(i = 0;i < size; ++i){
-		randvalue = rand()%end + start;
-		this->table[i] = randvalue;
-	}
-}
-
 void Table::addAtFirst(int elem){
 	if(table == NULL){
 		this->size = 0;
@@ -85,15 +70,16 @@ void Table::addAtEnd(int elem){
 }
 
 void Table::addAtIndex(int elem, int index){
+	if(index > size || index < 0){
+		return;
+	}
 	if(table == NULL){
 		this->size = 0;
 		this->table = new int[size];
 	}
 
 	resize(this->size + 1);
-	if(index > size){
-		return;
-	}
+	
 	for(int i = size-1; i > index;i--){
 			this->table[i] = this->table[i-1];
 	}
@@ -117,15 +103,23 @@ void Table::deleteAtEnd(){
 	resize(this->size - 1);
 }
 
-void Table::deleteAtIndex(int index){
-	if(size <= 0 || index > size){
+void Table::deleteAtKey(int value){
+	if(size <= 0){ //jesli talica jest pusta
 		return;
 	}
-
-	for(int i = index; i < size-1;i++){
-		this->table[i] = this->table[i+1];
+	int index = -1;
+	for(int i=0 ; i < size; i++){
+		if(this->table[i] == value){
+			index = i;
+			break;
+		}
 	}
-	resize(this->size - 1);
+	if(index >= 0){
+		for(int i = index; i < size-1;i++){
+			this->table[i] = this->table[i+1];
+		}
+		resize(this->size - 1);
+	}
 }
 
 void Table::searching(int elem){
@@ -140,6 +134,21 @@ void Table::searching(int elem){
 		cout << "W tablicy znajduje sie taki element."<<endl;
 	}else{
 		cout << "Nie ma takiej liczby"<<endl;
+	}
+}
+
+void Table::AddRandomToTesting(int newSize, int start, int end){
+	deleteStructure();
+	this->table = new int[newSize];
+	this->size = newSize;
+
+	srand(time(NULL));
+	int randvalue = 0;
+
+	int i;
+	for(i = 0;i < size; ++i){
+		randvalue = rand()%end + start;
+		this->table[i] = randvalue;
 	}
 }
 
@@ -178,19 +187,19 @@ std::ostream& operator<<(std::ostream &strm, const Table &table){
 	return strm << "Table size: " << table.size <<endl;
 }
 
-int main(int argc, char **args){
-	Table table;
+// int main(int argc, char **args){
+// 	Table table;
 
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int size;
-	sscanf(args[1], "%d", &size);
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int size;
+// 	sscanf(args[1], "%d", &size);
 
-	for(int i = 0; i < size; i++){
-		randvalue = rand();
-		// table.addAtIndex(randvalue,);
-	}
+// 	for(int i = 0; i < size; i++){
+// 		randvalue = rand();
+// 		// table.addAtIndex(randvalue,);
+// 	}
 
 
 	// for(int i = 0; i < size; i++){
@@ -242,5 +251,5 @@ int main(int argc, char **args){
 
 	// cout<<table<<endl;
 
-	return 0;
-}
+// 	return 0;
+// }

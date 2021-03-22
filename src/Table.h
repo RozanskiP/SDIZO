@@ -22,7 +22,7 @@ public:
 	void addAtIndex(int elem, int index);
 	void deleteAtFirst();
 	void deleteAtEnd();
-	void deleteAtIndex(int index);
+	void deleteAtKey(int value);
 	void searching(int elem);
 	void loadDataFromFile(const char * filename);
 	void show();

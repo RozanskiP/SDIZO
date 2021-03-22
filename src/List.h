@@ -31,7 +31,8 @@ public:
 	void deleteAtFirst();
 	void deleteAtEnd();
 	void deleteAtIndex(int index);
-	void searching(int value);
+	void deleteAtKey(int key);
+	Node * searching(int value);
 	void loadDataFromFile(const char * filename);
 	void show();
 	void AddRandomToTesting(int size, int start, int end);
