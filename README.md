@@ -13,6 +13,6 @@ Algorithms for classes: Data Structures and Computational Complexity
 * C++
 
 
-## Autor
+## Author
 * Paweł Różański
 
