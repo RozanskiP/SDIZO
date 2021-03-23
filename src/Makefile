@@ -2,7 +2,7 @@ all: trackHeap leakHeap trackBST leakBST buildRBT RBTleak buildMain
 
 buildMain:
 	clear
-	g++ -o Main Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp Main.cpp
+	g++ -o Main Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
 	./Main 
 
 buildRBT:

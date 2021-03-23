@@ -79,11 +79,18 @@ void Heap::deleteNodeKey(int elem){
 			break;
 		}
 	}
+	cout << "WArtosc do usun: " << indexToDelete << endl;
+	cout << "SIZE: " << this->size << endl;
 	if(indexToDelete == 0){
 		deleteNode();
 		return;
 	}
-	if(indexToDelete >= 0){
+	if(indexToDelete == size-1){ //jeśli nasza wartościa jest ostatni element to go usuwamy
+		this->size--;
+		this->reallocsize++;
+		return;
+	}
+	if(indexToDelete > 0){
 		tab[indexToDelete] = tab[size-1];
 		this->size--;
 		if(tab[indexToDelete] > tab[indexToDelete/2]){//jesli jest wiekszy od rodzica to
@@ -169,18 +176,17 @@ void Heap::searching(int elem){
 }
 
 void Heap::loadDataFromFile(const char * filename){
-	deleteStructure();
-	this->tab = new int[size+11];
-	int sizeFromFile = 0;
 	string line;
 	ifstream file;
-	this->size = 0;
-
 	file.open(filename);
 
 	if(!file){
 		cout << "Blad otwarcia pliku" << endl;
 	}else{
+		deleteStructure();
+		this->tab = new int[size+11];
+		int sizeFromFile = 0;
+		this->size = 0;
 		getline(file, line);
 		sizeFromFile = atoi(line.c_str());
 		int i;
@@ -217,9 +223,12 @@ void Heap::printBT(string sp, string sn, int v){ //TODO sa jakies dzinwe ascii
 	}
 }
 
-
 void Heap::show(){
 	int i;
+	if(size == 0){
+		cout << "Kopiec jest pusty" << endl;
+		return;
+	}
 	for(i = 0;i < size;i++){
 		cout << tab[i] << ", ";
 	}
@@ -328,4 +337,3 @@ void Heap::buildByFloydAlgoritm(){ //TODO na cwiczenia do usuniecia
 
 // 	return 0;
 // }
-

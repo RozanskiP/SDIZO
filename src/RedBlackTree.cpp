@@ -389,8 +389,6 @@ RedBlackTreeNode * RedBlackTree::searching(int elem){
 }
 
 void RedBlackTree::loadDataFromFile(const char * filename){
-	deleteStructureButDoNew(this->root);
-	int sizeFromFile = 0;
 	string line;
 	ifstream file;
 
@@ -399,6 +397,8 @@ void RedBlackTree::loadDataFromFile(const char * filename){
 	if(!file){
 		cout << "Blad otwarcia pliku" << endl;
 	}else{
+		deleteStructureButDoNew(this->root);
+		int sizeFromFile = 0;
 		getline(file, line);
 		sizeFromFile = atoi(line.c_str());
 		int i;

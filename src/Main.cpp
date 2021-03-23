@@ -14,7 +14,6 @@
 #include "Heap.h"
 #include "BinarySearchTree.h"
 #include "RedBlackTree.h"
-#include "AVLTree.h"
 
 
 using namespace std;
@@ -272,7 +271,7 @@ void menuBinarySearchTree(){
 
 }
 
-//RedBlackTree rbt;
+RedBlackTree rbt;
 
 void menuBlackReadTree(){
 	char opt;
@@ -287,64 +286,39 @@ void menuBlackReadTree(){
 
 		switch(opt){
 			case '1': //wczytywanie elementow z pliku
-
+				cout << "Podaj nazwe pliku: ";
+				cin >> filename;
+				rbt.loadDataFromFile(filename);
+				rbt.show();
 				break;
 			case '2': //usuwanie elementu
-			
+				cout << "Podaj wartosc: ";
+				cin >> value;
+				rbt.deleteNode(value);
+				rbt.show();
 				break;
 			case '3': //dodawanie elemntu
-			
+				cout << "Podaj wartosc: ";
+				cin >> value;
+				rbt.addNode(value);
+				rbt.show();
 				break;
 			case '4': //wyszukiwanie elemnetu
-
+				cout << "Podaj wartosc: ";
+				cin >> value;
+				rbt.searching(value);
+				rbt.show();
 				break;
 			case '5': //generowanie elementow
-			
+				cout << "Podaj ilosc elemenow tablicy: ";
+				cin >> value;
+				rbt.AddRandomToTesting(value, 0, 1000);
+				rbt.show();
 				break;
 			case '6': //wyswietlanie lementow
-			
+				rbt.show();
 				break;
-			case '7':
-			
-				break;
-		}
-	}while(opt != '0');
-}
-
-// AVLTree avlt;
-
-void menuAVL(){
-	char opt;
-	char filename[50];
-	int index;
-	int value;
-
-	do{
-		displayMenu(" -->MENU AVL<-- ");
-		cin >> opt;
-		cout << endl;
-
-		switch(opt){
-			case '1': //wczytywanie elementow z pliku
-
-				break;
-			case '2': //usuwanie elementu
-			
-				break;
-			case '3': //dodawanie elemntu
-			
-				break;
-			case '4': //wyszukiwanie elemnetu
-
-				break;
-			case '5': //generowanie elementow
-			
-				break;
-			case '6': //wyswietlanie lementow
-			
-				break;
-			case '7':
-			
+			case '7': //pomiary czasow
 				break;
 		}
 	}while(opt != '0');
@@ -362,7 +336,6 @@ int main(void){
 		cout << "3 <- Kopiec binarny" <<endl;
 		cout << "4 <- Drzewo przeszukiwan binarnych" <<endl;
 		cout << "5 <- Drzewo czerwono-czarne" <<endl;
-		cout << "6 <- Drzewo AVL" << endl;
 		cout << "0 <- Wyjscie z programu" <<endl;
 		cout << "Podaj opcje: ";
 		cin >> choose;
@@ -382,9 +355,6 @@ int main(void){
 			break;
 		case '5':
 			menuBlackReadTree();
-			break;
-		case '6':
-			menuAVL();
 			break;
 		}
 	}while(choose != '0');

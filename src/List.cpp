@@ -217,12 +217,13 @@ Node *List::searching(int value){
 void List::loadDataFromFile(const char * filename){
 	string line;
 	ifstream file;
-	deleteStructure();
-	file.open(filename);
 
+	file.open(filename);
+	
 	if(!file){
 		cout << "Blad otwarcia pliku" << endl;
 	}else{
+		deleteStructure();
 		getline(file,line);
 		int newSize = atoi(line.c_str());
 		cout << "SIZE: " << newSize << endl;
@@ -250,7 +251,7 @@ void List::loadDataFromFile(const char * filename){
 	}
 }
 
-void List::show(){ //TODO Wyswietlanie od tylu i od przodu
+void List::show(){
 	Node * node = head;
 	if(!node){
 		cout << "Lista jest pusta" <<endl;

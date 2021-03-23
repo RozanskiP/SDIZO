@@ -177,6 +177,10 @@ void Table::loadDataFromFile(const char * filename){
 
 void Table::show(){
 	int i;
+	if(size == 0){
+		cout << "Tablica jest pusta" << endl;
+		return;
+	}
 	for(i = 0;i < size;i++){
 		cout << this->table[i] << " ";
 	}
