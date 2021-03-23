@@ -1,5 +1,5 @@
 ## General info
-Algorithms in the classes: Data Structures and Computational Complexity
+Algorithms for the classes: Data Structures and Computational Complexity
 
 ## Data Structures
 * Table
