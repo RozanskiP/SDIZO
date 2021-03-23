@@ -12,11 +12,12 @@ class Table {
 public:
 	int *table;
 	int size;
+private:
+	void deleteStructure();
+	void resize(int newSize);
 public:
 	Table();
 	~Table();
-	void deleteStructure();
-	void resize(int newSize);
 	void addAtFirst(int elem);
 	void addAtEnd(int elem);
 	void addAtIndex(int elem, int index);

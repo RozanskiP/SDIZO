@@ -15,22 +15,23 @@ public:
 	Node *next;
 	Node *prev;
 	Node();
-	virtual ~Node();
+	~Node();
 };
 
 class List {
 private:
 	Node *head;
+private:
+	void deleteStructure();
+	void deleteAtIndex(int index);
 public:
 	List();
-	virtual ~List();
-	void deleteStructure();
+	~List();
 	void addAtFirst(int value);
 	void addAtEnd(int value);
 	void addAtIndex(int value, int index);
 	void deleteAtFirst();
 	void deleteAtEnd();
-	void deleteAtIndex(int index);
 	void deleteAtKey(int key);
 	Node * searching(int value);
 	void loadDataFromFile(const char * filename);

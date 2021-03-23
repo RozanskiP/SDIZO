@@ -280,7 +280,7 @@ void menuBlackReadTree(){
 	int value;
 
 	do{
-		displayMenu(" -->MENU BRT<-- ");
+		displayMenu(" -->MENU RBT<-- ");
 		cin >> opt;
 		cout << endl;
 

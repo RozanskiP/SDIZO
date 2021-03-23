@@ -16,21 +16,22 @@ public:
 	int *tab;
 	int size;
 	int reallocsize;
+private:
+	void realloc();
+	void deleteStructure();
+	void deleteNode();
+	void buildByFloydAlgoritm();
+	void printBT(std::string sp, std::string sn, int v);
+	void heapify(int tab[], int i);
 public:
 	Heap();
 	~Heap();
-	void deleteStructure();
-	void realloc();
 	void addNode(int value);
-	void deleteNode();
 	void deleteNodeKey(int elem);
 	void searching(int elem);
 	void loadDataFromFile(const char * filename);
-	void buildByFloydAlgoritm();
 	void show();
-	void printBT(std::string sp, std::string sn, int v);
 	void AddRandomToTesting(int size, int start, int end);
-	void heapify(int tab[], int i);
 };
 
 #endif /* HEAP_H_ */
