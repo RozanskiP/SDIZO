@@ -1,7 +1,7 @@
-##General info
+## General info
 Algorithms in the classes: Data Structures and Computational Complexity
 
-##Data Structures
+## Data Structures
 * Table
 * Doubly Linked List
 * Heap
@@ -9,10 +9,10 @@ Algorithms in the classes: Data Structures and Computational Complexity
 * Red-black Tree
 
 
-##Programing language
+## Programing language
 * C++
 
 
-##Autor
+## Autor
 * Paweł Różański
 
