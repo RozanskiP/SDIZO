@@ -241,21 +241,21 @@ void RedBlackTree::deleteNodeFixUp(RedBlackTreeNode *& node){ //ZAPODOBNE
 			if(brother->left->color == 'B' && brother->right->color == 'B'){
 				brother->color = 'R'; //zmiana koloru na czerwony
 				node = node->parent; //przesuniecie wartosci node do rodzica i wykonanie kolejnej petli
-				continue;
+			}else{
+				//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
+				if(brother->right->color == 'B'){
+					brother->left->color = 'B'; //zmiana koloru  lewego syna na czarny
+					brother->color = 'R'; // zmiana koloru brata na czerwony
+					rightRotation(brother); //rotacja prawostronan
+					brother = node->parent->right;  //nowa wartosc brata 
+				} // przekstalcenie naszego przypadku 3 na przypadek 4 i tutaj go dopiero zmieniamy
+				//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
+				brother->color = node->parent->color;
+				node->parent->color = 'B';
+				brother->right->color= 'B';
+				leftRotation(node->parent);
+				node = this->root; // ten warunek zakonczy nasza petle
 			}
-			//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
-			if(brother->right->color == 'B'){
-				brother->left->color = 'B'; //zmiana koloru  lewego syna na czarny
-				brother->color = 'R'; // zmiana koloru brata na czerwony
-				rightRotation(brother); //rotacja prawostronan
-				brother = node->parent->right;  //nowa wartosc brata 
-			} // przekstalcenie naszego przypadku 3 na przypadek 4 i tutaj go dopiero zmieniamy
-			//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
-			brother->color = node->parent->color;
-			node->parent->color = 'B';
-			brother->right->color= 'B';
-			leftRotation(node->parent);
-			node = this->root; // ten warunek zakonczy nasza petle
 		}else{// przypadki (lustrzane / symetryczne) gdy nasz wezel jest prawym synem
 			brother = node->parent->left; //przypisujemy do zmiennej brother wartosc brata naszego wezla
 			//1 przypadek gdy brat (brother) jest czerwony
@@ -269,21 +269,21 @@ void RedBlackTree::deleteNodeFixUp(RedBlackTreeNode *& node){ //ZAPODOBNE
 			if(brother->left->color == 'B' && brother->right->color == 'B'){
 				brother->color = 'R'; //zmiana koloru na czerwony
 				node = node->parent;
-				continue;
+			}else{
+				//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
+				if(brother->left->color == 'B'){
+					brother->right->color = 'B';
+					brother->color = 'R';
+					leftRotation(brother);
+					brother = node->parent->left;
+				}
+				//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
+				brother->color = node->parent->color;
+				node->parent->color = 'B';
+				brother->left->color= 'B';
+				rightRotation(node->parent);
+				node = this->root;			
 			}
-			//3 przypadek brat (brother) jest czarny lewy syn jest czerwony a prawy jest czarny
-			if(brother->left->color == 'B'){
-				brother->right->color = 'B';
-				brother->color = 'R';
-				leftRotation(brother);
-				brother = node->parent->left;
-			}
-			//4 przypadek brat (brother) jest czarny a jego prawy syn jest czerwony
-			brother->color = node->parent->color;
-			node->parent->color = 'B';
-			brother->left->color= 'B';
-			rightRotation(node->parent);
-			node = this->root;
 		}
 	}
 }
@@ -455,9 +455,9 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 // // 3 25 14 29 10 
 // 	RBTree.addNode(3);
 // 	RBTree.addNode(25);
-	// RBTree.addNode(14);
-	// RBTree.addNode(29);
-	// RBTree.addNode(10);
+// 	RBTree.addNode(14);
+// 	RBTree.addNode(29);
+// 	RBTree.addNode(10);
 // // 17 23 2 11 1 
 // 	RBTree.addNode(17);
 // 	RBTree.addNode(23);
@@ -478,10 +478,10 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 // 	RBTree.addNode(5);
 // // 22 7 13 9 26 
 // 	RBTree.addNode(22);
-	// RBTree.addNode(7);
-	// RBTree.addNode(13);
-	// RBTree.addNode(9);
-	// RBTree.addNode(26);
+// 	RBTree.addNode(7);
+// 	RBTree.addNode(13);
+// 	RBTree.addNode(9);
+// 	RBTree.addNode(26);
 // // 28 12 30 18 19
 // 	RBTree.addNode(28);
 // 	RBTree.addNode(12);
@@ -491,21 +491,21 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 
 
 // 	RBTree.show();
-	// RBTree.searching(14);
-	// RBTree.searching(29);
+// 	RBTree.searching(14);
+// 	RBTree.searching(29);
 // 	// RBTree.searching(7);
  
 // // 18 10 2 13 3
-	// RBTree.show();
-	// cout << "-----------------" << endl;
-	// RBTree.deleteNode(14);
-	// RBTree.show();
-	// cout << "-----------------" << endl;
-	// RBTree.deleteNode(10);
-	// RBTree.show();
-	// cout << "-----------------" << endl;
-	// RBTree.deleteNode(29);
-	// RBTree.show();
+// 	RBTree.show();
+// 	cout << "-----------------" << endl;
+// 	RBTree.deleteNode(14);
+// 	RBTree.show();
+// 	cout << "-----------------" << endl;
+// 	RBTree.deleteNode(10);
+// 	RBTree.show();
+// 	cout << "-----------------" << endl;
+// 	RBTree.deleteNode(29);
+// 	RBTree.show();
 // 	RBTree.deleteNode(13);
 // 	RBTree.deleteNode(3);
 // // 5 29 9 30 6 
@@ -530,17 +530,17 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 // // 7	
 // 	RBTree.deleteNode(7);
 
-	// RBTree.show();
+// 	RBTree.show();
 
-	//const char * filename = "DaneTablica.txt";
+// 	const char * filename = "DaneTablica.txt";
 
-	//RBTree.loadDataFromFile(filename);
+// 	RBTree.loadDataFromFile(filename);
 
-	//RBTree.show();
+// 	RBTree.show();
 
-	// RBTree.AddRandomToTesting(1000, -10000, 10000);
+// 	RBTree.AddRandomToTesting(1000, -10000, 10000);
 
-	//RBTree.show();
+// 	RBTree.show();
 
 // 	cout << "Koncze" << endl;
 
