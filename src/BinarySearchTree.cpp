@@ -296,7 +296,7 @@ void BinarySearchTree::DSW(){
 		temp = temp->parent->right;
 	}
 
-	// przejscie przez  elementy sk�adanie do konca w zalznosci od elenetow
+	// przejscie przez  elementy skladanie do konca w zaleznowsci od elementow
 	count = count - m;
 	while(count > 1){
 		count = count/2;
@@ -309,8 +309,6 @@ void BinarySearchTree::DSW(){
 }
 
 void BinarySearchTree::loadDataFromFile(const char * filename){
-	deleteStructure();
-	int sizeFromFile = 0;
 	string line;
 	ifstream file;
 
@@ -319,6 +317,8 @@ void BinarySearchTree::loadDataFromFile(const char * filename){
 	if(!file){
 		cout << "Blad otwarcia pliku" << endl;
 	}else{
+		deleteStructure();
+		int sizeFromFile = 0;
 		getline(file, line);
 		sizeFromFile = atoi(line.c_str());
 		int i;
