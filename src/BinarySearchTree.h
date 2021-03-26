@@ -35,7 +35,7 @@ public:
 	BinarySearchTree();
 	~BinarySearchTree();
 	void addNode(int value);
-	void deleteNode(BSTNode *& root, int value);
+	void deleteNode(int value);
 	BSTNode *searching(int value);
 	void DSW(); //algorytm rownowazenia drzewa
 	void loadDataFromFile(const char * filename);

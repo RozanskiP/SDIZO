@@ -107,7 +107,7 @@ BSTNode * BinarySearchTree::nastepnik(BSTNode *node){
 	if(node == NULL){ //sprawdza czy drzewo jest puste
 		return node;
 	}
-	if(node->right != NULL){ //pierwszy przypadek jesli ma prawego syna to wtedy wez minimum z tego drzewa
+	if(node->right != NULL){ //pierwszy przypadek jesli ma prawego syna to wtedy wez minimum z prawej gałezi
 		return minimum(node->right);
 	}else{ // 2 i 3 przypadek nie ma prawego syna
 		BSTNode *temp = node->parent;
@@ -135,23 +135,30 @@ BSTNode * BinarySearchTree::poprzednik(BSTNode *node){
 	}
 }
 
-void BinarySearchTree::deleteNode(BSTNode *& root, int value){
+void BinarySearchTree::deleteNode(int value){
 	BSTNode * temp = searching(value);
+	
 	//je�li nie ma takiego elementu
 	if(temp == NULL){
 		return;
 	}
+	if(this->root->right != NULL){
+		if(this->root->key == this->root->right->key && temp->key == this->root->key){ //warunek gdy sa 2 takie same wartosci w korzeniu i w prawym synu
+			temp = this->root->right;
+		}
+	}
+	
 	// -1 opcja: nie ma zadnego syna
 	if(temp->right == NULL && temp->left == NULL){
 		BSTNode * parent = temp->parent;
-		if(temp != root){ //jesli nie jest rowny korzeniowy
+		if(temp != this->root){ //jesli nie jest rowny korzeniowy
 			if(parent->left == temp){
 				parent->left = NULL;
 			}else{
 				parent->right = NULL;
 			}
 		}else{
-			root = NULL;
+			this->root = NULL;
 		}
 		temp->left = NULL;
 		temp->right = NULL;
@@ -162,7 +169,7 @@ void BinarySearchTree::deleteNode(BSTNode *& root, int value){
 	if(temp->right == NULL && temp->left != NULL){
 		BSTNode * parent = temp->parent;
 		BSTNode * son = temp->left;
-		if(temp != root){
+		if(temp != this->root){
 			son->parent = parent;
 			if(parent->left == temp){
 				parent->left = son;
@@ -170,7 +177,7 @@ void BinarySearchTree::deleteNode(BSTNode *& root, int value){
 				parent->right = son;
 			}
 		}else{
-			root = son;
+			this->root = son;
 		}
 		//ustawienie wartosci prawej i lewej na null zeby destruktor nie usunal innych elementow
 		temp->left = NULL;
@@ -182,7 +189,7 @@ void BinarySearchTree::deleteNode(BSTNode *& root, int value){
 	if(temp->right != NULL && temp->left == NULL){
 		BSTNode * parent = temp->parent;
 		BSTNode * son = temp->right;
-		if(temp != root){
+		if(temp != this->root){
 			son->parent = parent;
 			if(parent->left == temp){
 				parent->left = son;
@@ -190,18 +197,21 @@ void BinarySearchTree::deleteNode(BSTNode *& root, int value){
 				parent->right = son;
 			}
 		}else{
-			root = son;
+			this->root = son;
 		}
 		temp->left = NULL;
 		temp->right = NULL;
 		delete temp;
 		return;
 	}
+	
 	// -3 opcja: 2 syn�w
 	// naprawienie miejsca skad wzielismy wezle next
 	BSTNode * next = nastepnik(temp);
+	// cout << "RODZIC: " << next->parent->key << endl;
+	// cout << "Prawy syn: " << next->right->key << endl;
 	int val = next->key; //zapisz wartosc
-	deleteNode(root, next->key); //zrob rekurencyjnie tak znowu az nie bedizie mial jednego syna
+	deleteNode(next->key); //zrob rekurencyjnie tak znowu az nie bedizie mial jednego syna
 	temp->key = val; //przypisz wartosc
 	return;
 }
@@ -378,9 +388,15 @@ void BinarySearchTree::AddRandomToTesting(int size, int start, int end){
 
 // 	BinarySearchTree tree;
 
-// 	tree.addNode(9);
-// 	tree.addNode(14);
-// 	tree.addNode(5);
+// 	tree.addNode(11);
+// 	tree.addNode(11);
+// 	tree.addNode(10);
+
+// 	// tree.searching(11);
+// 	tree.deleteNode(11);
+// 	return 0;
+// }
+
 // 	tree.addNode(1);
 
 // 	tree.addNode(6);
@@ -449,5 +465,3 @@ void BinarySearchTree::AddRandomToTesting(int size, int start, int end){
 // 	tree.inOrder(tree.root);
 
 // 	cout << "Koniec" <<endl;
-// 	return 0;
-// }

@@ -237,7 +237,7 @@ void menuBinarySearchTree(){
 			case '2': //usuwanie elementu
 				cout << "Podaj wartosc: ";
 				cin >> value;
-				bst.deleteNode(bst.root, value);
+				bst.deleteNode(value);
 				bst.show();
 				break;
 			case '3': //dodawanie elemntu
