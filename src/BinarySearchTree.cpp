@@ -81,6 +81,7 @@ void BinarySearchTree::addNode(int value){
 	}else{ // w przeciwnym nazie na prawo
 		temp2->right = node;
 	}
+	DSW();
 }
 
 BSTNode * BinarySearchTree::minimum(BSTNode *node){
@@ -203,6 +204,7 @@ void BinarySearchTree::deleteNode(BSTNode *& root, int value){
 	int val = next->key; //zapisz wartosc
 	deleteNode(root, next->key); //zrob rekurencyjnie tak znowu az nie bedizie mial jednego syna
 	temp->key = val; //przypisz wartosc
+	DSW();
 	return;
 }
 
@@ -261,7 +263,7 @@ void BinarySearchTree::leftRotation(BSTNode *tempRoot, BSTNode *& root){ //rotac
 		rightson->parent = tempRootparent;
 		tempRoot->parent = rightson;
 
-		if(tempRootparent != NULL){ //je�li rodzic nie by� korzeniem
+		if(tempRootparent != NULL){ //jezli rodzic nie byl korzeniem
 			if(tempRootparent->left == tempRoot){ //jesli nasz weze zamieniany byl po lewo
 				tempRootparent->left = rightson;
 			}else{ //jesli byl po prawo
@@ -370,6 +372,33 @@ void BinarySearchTree::AddRandomToTesting(int size, int start, int end){
 		randvalue = rand()%end + start;
 		addNode(randvalue);
 	}
+}
+
+int main(int argc, char **args){
+
+	BinarySearchTree bst;
+
+	srand(time(NULL));
+	int randvalue = 0;
+	int index = 0;
+	int size;
+	sscanf(args[1], "%d", &size);
+
+	for(int i=0; i < size; i++){
+		randvalue = rand()%1000;
+		bst.addNode(randvalue);
+	}
+
+	// for(int i=0; i < size; i++){
+	// 	bst.deleteNode(bst.root, i);
+	// }
+
+	// for(int i=0; i < size; i++){
+	// 	randvalue = rand();
+	// 	bst.searching(randvalue);
+	// }
+
+	return 0;
 }
 
 // int main(void){

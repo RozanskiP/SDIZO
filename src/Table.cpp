@@ -194,7 +194,6 @@ std::ostream& operator<<(std::ostream &strm, const Table &table){
 // int main(int argc, char **args){
 // 	Table table;
 
-
 // 	srand(time(NULL));
 // 	int randvalue = 0;
 // 	int size;
@@ -202,14 +201,18 @@ std::ostream& operator<<(std::ostream &strm, const Table &table){
 
 // 	for(int i = 0; i < size; i++){
 // 		randvalue = rand();
-// 		// table.addAtIndex(randvalue,);
+// 		table.addAtFirst(randvalue);
 // 	}
 
+// 	for(int i = 0; i < size; i++){
+// 		randvalue = rand();
+// 		table.searching(randvalue);
+// 	}
+// 		return 0;
+// }
 
-	// for(int i = 0; i < size; i++){
-	// 	randvalue = rand();
-	// 	table.searching(randvalue);
-	// }
+
+	
 
 
 	// table.addAtIndex(randvalue,); 1000 30000 po 1000
@@ -255,5 +258,4 @@ std::ostream& operator<<(std::ostream &strm, const Table &table){
 
 	// cout<<table<<endl;
 
-// 	return 0;
-// }
+

@@ -276,6 +276,29 @@ void Heap::buildByFloydAlgoritm(){ //TODO na cwiczenia do usuniecia
 	}
 }
 
+int main(int argc, char **args){
+
+	Heap heap;
+
+	srand(time(NULL));
+	int randvalue = 0;
+	int index = 0;
+	int size = 10;
+	sscanf(args[1], "%d", &size);
+
+	for(int i=0; i < size; i++){
+		randvalue = rand();
+		heap.addNode(randvalue);
+	}
+
+	// for(int i=0; i < 10000; i++){
+	// 	randvalue = rand();
+	// 	heap.searching(randvalue);
+	// }
+
+	return 0;
+}
+
 // int main(void){
 
 // 	Heap heap;

@@ -36,6 +36,7 @@ private:
 	RedBlackTreeNode *minimum(RedBlackTreeNode *node);
 	RedBlackTreeNode *maximum(RedBlackTreeNode *node);
 	RedBlackTreeNode *succesor(RedBlackTreeNode *node);
+	void print(std::string sp, std::string sn, RedBlackTreeNode * v);
 public:
 	RedBlackTree();
 	~RedBlackTree();
@@ -45,7 +46,6 @@ public:
 	void loadDataFromFile(const char * filename);
 	void show();
 	void AddRandomToTesting(int size, int start, int end);
-	void print(std::string sp, std::string sn, RedBlackTreeNode * v);
 };
 
 #endif /* REDBLACKTREE_H_ */
