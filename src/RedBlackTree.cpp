@@ -413,9 +413,15 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 	string cr, cl, cp;
 
 	cr = cl = cp = "  ";
-	cr [0] = 43; cr [1] = 45;
-	cl [0] = 45; cl [1] = 43;
-	cp [0] = 124;
+	// cr [0] = 43; cr [1] = 45;
+	// cl [0] = 45; cl [1] = 43;
+	// cp [0] = 124;
+
+	cr[0] = '-';
+	cr[1] = '-';
+	cl[0] = '~';
+	cl[1] = '-';
+	cp[0] = '|';
 
 	if(v != nullLeaf)
 	{
@@ -431,6 +437,33 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 		if( sn == cl ) s [ s.length( ) - 2 ] = ' ';
 		print( s + cp, cl, v->left );
 	}
+}
+
+int main(int argc, char **args){
+
+	RedBlackTree rbt;
+
+	srand(time(NULL));
+	int randvalue = 0;
+	int index = 0;
+	int size = 10;
+	sscanf(args[1], "%d", &size);
+
+	for(int i=0; i < size; i++){
+		randvalue = rand();
+		rbt.addNode(randvalue);
+	}
+
+	// for(int i=0; i < size; i++){
+	// 	rbt.deleteNode(i);
+	// }
+
+	// for(int i=0; i < 1000; i++){
+	// 	randvalue = rand();
+	// 	rbt.searching(randvalue);
+	// }
+
+	return 0;
 }
 
 // int main(void){

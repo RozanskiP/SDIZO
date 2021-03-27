@@ -82,13 +82,17 @@ void List::addAtFirst(int value){
 
 void List::addAtEnd(int value){
 	Node * node = new Node();
-	Node* temp = head;
-
+	node->value = value;
+	node->next = NULL;
+	if(this->head == NULL){
+		this->head = node;
+		return;
+	}
+	Node* temp = this->head;
 	while(temp->next != NULL){
 		temp = temp->next;
 	}
-	node->value = value;
-	node->next = NULL;
+	
 	temp->next = node;
 	node->prev = temp;
 }
@@ -105,7 +109,6 @@ void List::addAtIndex(int value, int index){
 	
 	while(temp != NULL){
 		if(temp->next == NULL){
-			cout << "temp" << endl;
 			temp->next = node;
 			node->prev = temp;
 			return;
@@ -141,6 +144,9 @@ void List::deleteAtEnd(){
 	}else{
 		Node *temp = NULL;
 		Node *lastnode = head;
+		if(lastnode->next == NULL){
+			return;
+		}
 		while(lastnode->next != NULL){
 			lastnode = lastnode->next;
 		}
@@ -202,8 +208,6 @@ void List::deleteAtIndex(int index){
 }
 
 Node *List::searching(int value){
-	int counter = 0;
-
 	Node *temp = head;
 	while(temp != NULL){
 		if(temp->value == value){
@@ -285,14 +289,42 @@ void List::show(){
 
 // 	srand(time(NULL));
 // 	int randvalue = 0;
+// 	int index = 0;
 // 	int size = 10;
-// 	// sscanf(args[1], "%d", &size);
+// 	sscanf(args[1], "%d", &size);
 
 // 	for(int i=0; i < size; i++){
 // 		randvalue = rand();
-// 		list.addAtFirst(i);
+// 		list.addAtFirst(randvalue);
 // 	}
-// 	list.show();
+
+// 	// for(int i=0; i < 1000; i++){
+// 	// 	randvalue = rand();
+// 	// 	list.searching(randvalue);
+// 	// }
+
+// 	return 0;
+// }
+
+int main(int argc, char **args){
+
+	List list;
+
+	srand(time(NULL));
+	int randvalue = 0;
+	int index = 0;
+	int size;
+	sscanf(args[1], "%d", &size);
+
+	for(int i=0; i < size;){
+		randvalue = rand();
+		list.addAtIndex(randvalue, index);
+		i++;
+		index = rand() % i;
+	}
+
+	return 0;
+}
 
 
 // // 	cout << "D1zialam" <<endl;
@@ -333,6 +365,3 @@ void List::show(){
 // // 	list.show();
 
 // // 	cout << "Koniec" <<endl;
-
-// 	return 0;
-// }
