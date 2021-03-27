@@ -12,6 +12,14 @@ Algorithms for classes: Data Structures and Computational Complexity
 ## Programing language
 * C++
 
+## How to run
+* git clone https://github.com/RozanskiP/SDIZO.git
+* ./Main
+
+# To debag 
+* g++ -o -g Main Main.cpp
+* ./Main
+
 
 ## Author
 * Paweł Różański
