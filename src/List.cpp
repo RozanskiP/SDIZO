@@ -306,25 +306,25 @@ void List::show(){
 // 	return 0;
 // }
 
-int main(int argc, char **args){
+// int main(int argc, char **args){
 
-	List list;
+// 	List list;
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int index = 0;
-	int size;
-	sscanf(args[1], "%d", &size);
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int index = 0;
+// 	int size;
+// 	sscanf(args[1], "%d", &size);
 
-	for(int i=0; i < size;){
-		randvalue = rand();
-		list.addAtIndex(randvalue, index);
-		i++;
-		index = rand() % i;
-	}
+// 	for(int i=0; i < size;){
+// 		randvalue = rand();
+// 		list.addAtIndex(randvalue, index);
+// 		i++;
+// 		index = rand() % i;
+// 	}
 
-	return 0;
-}
+// 	return 0;
+// }
 
 
 // // 	cout << "D1zialam" <<endl;

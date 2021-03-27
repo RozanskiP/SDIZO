@@ -384,32 +384,32 @@ void BinarySearchTree::AddRandomToTesting(int size, int start, int end){
 	}
 }
 
-int main(int argc, char **args){
+// int main(int argc, char **args){
 
-	BinarySearchTree bst;
+// 	BinarySearchTree bst;
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int index = 0;
-	int size;
-	sscanf(args[1], "%d", &size);
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int index = 0;
+// 	int size;
+// 	sscanf(args[1], "%d", &size);
 
-	for(int i=0; i < size; i++){
-		randvalue = rand()%1000;
-		bst.addNode(randvalue);
-	}
+// 	for(int i=0; i < size; i++){
+// 		randvalue = rand()%1000;
+// 		bst.addNode(randvalue);
+// 	}
 
-	// for(int i=0; i < size; i++){
-	// 	bst.deleteNode(bst.root, i);
-	// }
+// 	// for(int i=0; i < size; i++){
+// 	// 	bst.deleteNode(bst.root, i);
+// 	// }
 
-	// for(int i=0; i < size; i++){
-	// 	randvalue = rand();
-	// 	bst.searching(randvalue);
-	// }
+// 	// for(int i=0; i < size; i++){
+// 	// 	randvalue = rand();
+// 	// 	bst.searching(randvalue);
+// 	// }
 
-	return 0;
-}
+// 	return 0;
+// }
 
 // int main(void){
 

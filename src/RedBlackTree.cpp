@@ -439,20 +439,20 @@ void RedBlackTree::print(std::string sp, std::string sn, RedBlackTreeNode * v){ 
 	}
 }
 
-int main(int argc, char **args){
+// int main(int argc, char **args){
 
-	RedBlackTree rbt;
+// 	RedBlackTree rbt;
 
-	srand(time(NULL));
-	int randvalue = 0;
-	int index = 0;
-	int size = 10;
-	sscanf(args[1], "%d", &size);
+// 	srand(time(NULL));
+// 	int randvalue = 0;
+// 	int index = 0;
+// 	int size = 10;
+// 	sscanf(args[1], "%d", &size);
 
-	for(int i=0; i < size; i++){
-		randvalue = rand();
-		rbt.addNode(randvalue);
-	}
+// 	for(int i=0; i < size; i++){
+// 		randvalue = rand();
+// 		rbt.addNode(randvalue);
+// 	}
 
 	// for(int i=0; i < size; i++){
 	// 	rbt.deleteNode(i);
@@ -463,8 +463,8 @@ int main(int argc, char **args){
 	// 	rbt.searching(randvalue);
 	// }
 
-	return 0;
-}
+// 	return 0;
+// }
 
 // int main(void){
 // 	cout << "Zaczynam" << endl;
