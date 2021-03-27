@@ -2,8 +2,8 @@ all: trackHeap leakHeap trackBST leakBST buildRBT RBTleak buildMain
 
 test:
 	clear
-	g++ -o RBT RedBlackTree.cpp
-	hyperfine  --warmup 2 --parameter-scan size 1000 100000 -D 10000  "./Heap {size}" --export-csv WynikiKopiecDodawanie2.csv
+	g++ -o List List.cpp
+	hyperfine  --warmup 2 --parameter-scan size 1000 41000 -D 10000  "./List {size}" --export-csv WynikiListaDodawanieIndex2.csv
 
 zapis:
 	tablica:
