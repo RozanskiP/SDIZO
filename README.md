@@ -16,7 +16,8 @@ Algorithms for classes: Data Structures and Computational Complexity
 * git clone https://github.com/RozanskiP/SDIZO.git
 * ./Main
 
-## To debag 
+## To complie or debag 
+* g++ -o Main Main.cpp
 * g++ -o -g Main Main.cpp
 * ./Main
 
