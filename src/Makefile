@@ -8,7 +8,8 @@ test:
 main:
 	clear
 	g++ -o Main Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
-	./Main 
+	./Main
+	rm main
 
 buildRBT:
 	clear
