@@ -9,7 +9,7 @@ main:
 	clear
 	g++ -o Main Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
 	./Main
-	rm main
+	rm Main
 
 buildRBT:
 	clear

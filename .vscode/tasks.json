@@ -10,10 +10,6 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
-                // "Table.cpp",
-                // "List.cpp",
-                // "Heap.cpp",
-                // "BinarySearchTree.cpp"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
