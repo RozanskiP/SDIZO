@@ -93,8 +93,8 @@ RedBlackTreeNode *RedBlackTree::succesor(RedBlackTreeNode *node){
 		r = node->parent;
 		while( ( r != this->nullLeaf ) && ( node == r->right ) )
 		{
-		node = r;
-		r = r->parent;
+			node = r;
+			r = r->parent;
 		}
 		return r;
 	}
