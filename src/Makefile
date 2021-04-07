@@ -1,4 +1,4 @@
-all: trackHeap leakHeap trackBST leakBST buildRBT RBTleak main
+all: main
 
 test:
 	clear
