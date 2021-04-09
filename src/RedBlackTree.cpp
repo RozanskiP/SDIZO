@@ -112,7 +112,7 @@ void RedBlackTree::rightRotation(RedBlackTreeNode *forRotat){
 		}
 		leftson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
 
-		if (forRotat->parent == nullptr) {//jesli byl korzeniem to korzen zmienia swoja wartosc
+		if (forRotat->parent == nullLeaf) {//jesli byl korzeniem to korzen zmienia swoja wartosc
 			this->root = leftson;
 		} else if (forRotat == forRotat->parent->right) {//przypisanie do rodzica czy jest to jego prawy czy lewy syn
 			forRotat->parent->right = leftson;
@@ -134,7 +134,7 @@ void RedBlackTree::leftRotation(RedBlackTreeNode *forRotat){
 		}
 		rightson->parent = forRotat->parent; //przypisz do nowego wezla rodzica - rodzica starego wezla
 		
-		if (forRotat->parent == nullptr) { //jesli byl korzeniem to korzen zmienia swoja wartosc
+		if (forRotat->parent == nullLeaf) { //jesli byl korzeniem to korzen zmienia swoja wartosc
 			this->root = rightson;
 		} else if (forRotat == forRotat->parent->left) { //przypisanie do rodzica czy jest to jego prawy czy lewy syn
 			forRotat->parent->left = rightson;
