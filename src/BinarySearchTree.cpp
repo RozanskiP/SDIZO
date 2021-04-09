@@ -81,7 +81,7 @@ void BinarySearchTree::addNode(int value){
 	}else{ // w przeciwnym nazie na prawo
 		temp2->right = node;
 	}
-	DSW();
+	// DSW();
 }
 
 BSTNode * BinarySearchTree::minimum(BSTNode *node){
@@ -214,7 +214,7 @@ void BinarySearchTree::deleteNode(int value){
 	int val = next->key; //zapisz wartosc
 	deleteNode(next->key); //zrob rekurencyjnie tak znowu az nie bedizie mial jednego syna
 	temp->key = val; //przypisz wartosc
-	DSW();
+	// DSW();
 	return;
 }
 
