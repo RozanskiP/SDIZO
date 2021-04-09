@@ -1,15 +1,9 @@
 all: main
 
-test:
-	clear
-	g++ -o List List.cpp
-	hyperfine  --warmup 2 --parameter-scan size 1000 41000 -D 10000  "./List {size}" --export-csv WynikiListaDodawanieIndex2.csv
-
 main:
 	clear
-	g++ -o Main Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
-	./Main
-	rm Main
+	g++ -o Main.exe Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
+	./Main.exe
 
 buildRBT:
 	clear
