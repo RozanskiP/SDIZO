@@ -68,9 +68,9 @@ void menuTable(){
 				table.show();
 				break;
 			case '2': //usuwanie elementu
-				cout << "Podaj wartosc: ";
+				cout << "Podaj index: ";
 				cin >> index;
-				table.deleteAtKey(index);
+				table.deleteAtIndex(index);
 				table.show();
 				break;
 			case '3': //dodawanie elemntu

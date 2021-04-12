@@ -103,16 +103,9 @@ void Table::deleteAtEnd(){
 	resize(this->size - 1);
 }
 
-void Table::deleteAtKey(int value){
+void Table::deleteAtIndex(int index){
 	if(size <= 0){ //jesli talica jest pusta
 		return;
-	}
-	int index = -1;
-	for(int i=0 ; i < size; i++){
-		if(this->table[i] == value){
-			index = i;
-			break;
-		}
 	}
 	if(index >= 0){
 		for(int i = index; i < size-1;i++){

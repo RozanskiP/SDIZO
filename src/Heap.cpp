@@ -50,16 +50,17 @@ void Heap::addNode(int value){
 		this->reallocsize = 10;
 		realloc();
 	}
-
-	int indexnew = this->size;
+	int temp;
+	int indexnew = this->size++;
 	int parent = (indexnew-1)/2;
 	while(indexnew > 0 && value > tab[parent]){ //je�li warto�� jest wieksza niz rodzic i wartosc indexu miesci sie w rozmiarze
+		// temp = tab[indexnew];
 		tab[indexnew] = tab[parent];
+		// tab[parent] = temp;
 		indexnew = parent;
 		parent = (indexnew-1)/2;
 	}
 	tab[indexnew] = value;
-	this->size++;
 	this->reallocsize--;
 }
 
@@ -79,7 +80,7 @@ void Heap::deleteNodeKey(int elem){
 			break;
 		}
 	}
-	cout << "WArtosc do usun: " << indexToDelete << endl;
+	cout << "Indeks do usun: " << indexToDelete << endl;
 	cout << "SIZE: " << this->size << endl;
 	if(indexToDelete == 0){
 		deleteNode();
@@ -91,11 +92,15 @@ void Heap::deleteNodeKey(int elem){
 		return;
 	}
 	if(indexToDelete > 0){
+		int temp = tab[indexToDelete];
 		tab[indexToDelete] = tab[size-1];
+		tab[size-1] = temp;
+		// cout << "Zamiana: " << indexToDelete << " : " << size-1 << endl;
 		this->size--;
-		if(tab[indexToDelete] > tab[indexToDelete/2]){//jesli jest wiekszy od rodzica to
-			cout << "Wiekszy" << endl;
-			while( ( indexToDelete > 0 ) && ( (indexToDelete-1)/2 >= 0 ) && ( tab[indexToDelete/2] > tab[indexToDelete] ) ){
+		if(tab[indexToDelete] > tab[(indexToDelete-1)/2]){//jesli jest wiekszy od rodzica to
+			// cout << "Wiekszy" << endl;
+			while( ( indexToDelete > 0 ) && ( (indexToDelete-1)/2 >= 0 ) && ( tab[(indexToDelete-1)/2] < tab[indexToDelete] ) ){
+				// cout << "Zamiana Wiekszy: " << indexToDelete << " : " << (indexToDelete-1)/2 << endl;
 				int temp = tab[(indexToDelete-1)/2];
 				tab[(indexToDelete-1)/2] = tab[indexToDelete];
 				tab[indexToDelete] = temp;
@@ -104,25 +109,28 @@ void Heap::deleteNodeKey(int elem){
 			}
 		}else if(tab[indexToDelete] < tab[(indexToDelete-1)/2]){ //jesli jest mniejszy od rodzica to
 			int v = tab[indexToDelete];
-			cout << "Mniejszy" << endl;
-			int parent = 0;
-			int son = 1;
-			cout << "indexToDelete: " << indexToDelete << endl;
-			cout << "Rodzic: " << tab[parent] << endl;
-			cout << "Syn lewy: " << tab[son] << endl;
+			// cout << "Mniejszy" << endl;
+			int parent = (indexToDelete-1)/2;
+			int son = indexToDelete*2+1;
+			// cout << "indexToDelete: " << indexToDelete << endl;
+			// cout << "Rodzic: " << tab[parent] << endl;
+			// cout << "Syn lewy: " << tab[son] << endl;
 			while(son < size){
 				if(son+1 < size && tab[son+1] > tab[son]){ //jesli prawy syn jest wiekszy to zamien na jego paramtry i wtedy zmienimy z prawym synem
 					son++;
-					cout << "Zamieniamy na prawego" << endl;
+					// cout << "Zamieniamy na prawego" << endl;
 				}
 				if( v >= tab[son]){ // jak warunek jest spelniony ze obydwoje z synow sa mniejsi to wyjdz
 					break;
 				}
+				// cout << "Zamiana: " << indexToDelete << " : " << son << endl;
+				temp = tab[indexToDelete];
 				tab[indexToDelete] = tab[son];
+				tab[son] = temp;
 				parent = son;
 				son = 2*son+1; // wpisanie nastepnego lewego syna
 			}
-			tab[parent] = v;
+			// tab[parent] = v;
 			this->reallocsize++;
 		}else{ //jesli jest rowny rodzicow to nic nie robimy czyli ostatni mozliwe warunek
 			cout << "Rowny" << endl;
@@ -186,14 +194,17 @@ void Heap::loadDataFromFile(const char * filename){
 		deleteStructure();
 		this->tab = new int[size+11];
 		int sizeFromFile = 0;
-		this->size = 0;
 		getline(file, line);
 		sizeFromFile = atoi(line.c_str());
 		int i;
 		for(i = 0;i < sizeFromFile;i++){
 			getline(file, line);
 			addNode(atoi(line.c_str()));
+
+			// tab[i] = atoi(line.c_str());
 		}
+		// buildByFloydAlgoritm();
+		file.close();
 	}
 }
 
@@ -271,7 +282,7 @@ void moveDown(int tab2[],int first, int last){ //TODO na cwiczenia do usuniecia
 
 void Heap::buildByFloydAlgoritm(){ //TODO na cwiczenia do usuniecia
 	int i;
-	for(i = (size/2)-1; i >= 0; --i){ //dla kazdego elementu nie b�dacego li�ciem przeproawdzic
+	for(i = (size-1)/2 - 1; i >= 0; --i){ //dla kazdego elementu nie b�dacego li�ciem przeproawdzic
 		moveDown(tab, i, size-1); //przeksztalcenie zmiany z synami jesli sa wieksi
 	}
 }
