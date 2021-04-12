@@ -2,8 +2,7 @@ all: main
 
 main:
 	clear
-	g++ -g -o Main.exe Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
-	valgrind --leak-check=full ./Main.exe
+	g++ -o Main.exe Heap.cpp List.cpp Table.cpp BinarySearchTree.cpp RedBlackTree.cpp Main.cpp
 	./Main.exe
 
 buildRBT:
