@@ -9,14 +9,14 @@ Algorithms for classes: Data Structures and Computational Complexity
 * Red-black Tree
 
 
-## Programing language
+## Programming language
 * C++
 
 ## How to run
 * git clone https://github.com/RozanskiP/SDIZO.git
 * ./Main
 
-## To complie or debag 
+## To compile or debug 
 * g++ -o Main Main.cpp
 * g++ -o -g Main Main.cpp
 * ./Main
